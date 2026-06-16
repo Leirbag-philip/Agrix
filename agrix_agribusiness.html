@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrix - Inovação e Gestão no Agronegócio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        agro: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d', // Primary Dark Green
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        earth: {
+                            500: '#8B4513', // SaddleBrown for accents
+                            700: '#5C4033', // Dark brown
+                        },
+                        navy: {
+                            800: '#1e3a8a',
+                            900: '#1e3a5f', // Used in the logo
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #15803d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #166534;
+        }
+        
+        /* Hero Section Parallax effect */
+        .bg-hero-pattern {
+            background-image: linear-gradient(rgba(21, 128, 61, 0.8), rgba(30, 58, 95, 0.8)), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Stats Parallax */
+        .bg-stats-pattern {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1592982537447-6f23f1e913a8?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased overflow-x-hidden">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-sm py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Area -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- Using SVG to recreate the logo concept provided -->
+                    <div class="flex flex-col items-center">
+                        <svg class="h-12 w-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Circle/Sun -->
+                            <circle cx="50" cy="50" r="40" stroke="#86efac" stroke-width="4" stroke-dasharray="100 150" stroke-linecap="round" class="transform rotate-[-45deg] origin-center" />
+                            
+                            <!-- Leaves -->
+                            <path d="M50 80 C 50 80, 50 40, 50 20 C 70 20, 85 35, 85 50 C 85 65, 70 80, 50 80 Z" fill="#22c55e" />
+                            <path d="M50 80 C 50 80, 50 50, 50 35 C 35 35, 25 45, 25 55 C 25 65, 35 80, 50 80 Z" fill="#86efac" />
+                            
+                            <!-- Stem/Divider -->
+                            <path d="M50 80 C 50 60, 60 40, 80 30" stroke="#f0fdf4" stroke-width="3" stroke-linecap="round" fill="none" />
+                            <path d="M50 80 C 50 65, 45 50, 30 45" stroke="#f0fdf4" stroke-width="2" stroke-linecap="round" fill="none" />
+                            
+                            <!-- Soil/Furrows -->
+                            <path d="M20 60 Q 40 85 50 90 Q 60 85 80 60" stroke="#15803d" stroke-width="5" stroke-linecap="round" fill="none" />
+                            <path d="M30 65 Q 45 80 50 80 Q 55 80 70 65" stroke="#8B4513" stroke-width="5" stroke-linecap="round" fill="none" />
+                            <path d="M40 70 Q 45 75 50 75 Q 55 75 60 70" stroke="#5C4033" stroke-width="4" stroke-linecap="round" fill="none" />
+                        </svg>
+                        <div class="text-center mt-1">
+                            <span class="text-2xl font-bold text-navy-900 tracking-wider">AGRIX</span>
+                            <span class="block text-[8px] uppercase font-semibold text-navy-800 tracking-widest mt-[-4px]">Agronegócio & Inovação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#solucoes" class="text-gray-700 hover:text-agro-700 font-medium transition-colors">Soluções</a>
+                    <a href="#tecnologia" class="text-gray-700 hover:text-agro-700 font-medium transition-colors">Tecnologia</a>
+                    <a href="#sustentabilidade" class="text-gray-700 hover:text-agro-700 font-medium transition-colors">Sustentabilidade</a>
+                    <a href="#sobre" class="text-gray-700 hover:text-agro-700 font-medium transition-colors">Sobre Nós</a>
+                    <a href="#contato" class="bg-agro-700 text-white px-6 py-2.5 rounded-full font-medium hover:bg-agro-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200">
+                        Fale Conosco
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-agro-700 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#solucoes" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-agro-700 hover:bg-gray-50">Soluções</a>
+                <a href="#tecnologia" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-agro-700 hover:bg-gray-50">Tecnologia</a>
+                <a href="#sustentabilidade" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-agro-700 hover:bg-gray-50">Sustentabilidade</a>
+                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-agro-700 hover:bg-gray-50">Sobre Nós</a>
+                <a href="#contato" class="block mt-4 px-3 py-3 text-center rounded-md text-base font-medium bg-agro-700 text-white hover:bg-agro-800">Fale Conosco</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-hero-pattern min-h-[80vh] flex items-center">
+        <!-- Decorative Shape -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-gray-50">
+                <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 60C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center lg:text-left flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 lg:pr-8">
+                <span class="inline-block py-1 px-3 rounded-full bg-agro-500/20 text-agro-200 text-sm font-semibold tracking-wider mb-4 border border-agro-400/30 backdrop-blur-sm fade-in-up">
+                    O FUTURO DO CAMPO É AGORA
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 fade-in-up delay-100">
+                    Inteligência para o <span class="text-agro-300">Agronegócio</span> de Alta Performance
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto lg:mx-0 fade-in-up delay-200">
+                    Soluções integradas em software, biotecnologia e consultoria para maximizar a produtividade da sua lavoura com sustentabilidade e precisão.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start fade-in-up delay-300">
+                    <a href="#solucoes" class="px-8 py-4 bg-agro-500 hover:bg-agro-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group">
+                        Conheça as Soluções
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#demo" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-lg border border-white/30 backdrop-blur-sm transition-all duration-300 flex items-center justify-center">
+                        Solicitar Demonstração
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Dashboard Mockup Image Placeholder -->
+            <div class="lg:w-1/2 mt-16 lg:mt-0 fade-in-up delay-300 hidden lg:block">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gray-900/50 backdrop-blur-md p-2">
+                    <div class="absolute top-0 left-0 w-full h-8 bg-gray-800/80 rounded-t-xl flex items-center px-4 gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Agrix Software Dashboard" class="w-full h-auto rounded-xl mt-6 opacity-90 hover:opacity-100 transition-opacity duration-500 object-cover" style="aspect-ratio: 16/9;">
+                    <!-- Overlay floating cards -->
+                    <div class="absolute bottom-6 -left-6 bg-white p-4 rounded-lg shadow-xl animate-bounce" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-agro-100 p-2 rounded-full text-agro-600"><i class="fas fa-chart-line"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold">Produtividade</p>
+                                <p class="text-lg font-bold text-gray-800">+24.5%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucoes" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-agro-700 font-semibold tracking-wide uppercase text-sm mb-2">Nosso Ecossistema</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Soluções Completas para o Campo</h3>
+                <p class="text-gray-600 text-lg">A Agrix integra tecnologia de ponta com conhecimento agronômico para entregar resultados tangíveis em cada etapa do ciclo produtivo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-agro-50 text-agro-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-agro-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Agricultura de Precisão</h4>
+                    <p class="text-gray-600 mb-4">Monitoramento satelital, mapeamento de solo e aplicação em taxa variável para otimizar o uso de insumos e maximizar o potencial genético de cada talhão.</p>
+                    <a href="#" class="text-agro-600 font-semibold flex items-center gap-1 hover:text-agro-800">Saiba mais <i class="fas fa-angle-right"></i></a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Software de Gestão (ERP)</h4>
+                    <p class="text-gray-600 mb-4">Plataforma AgriX integrada. Controle total de custos, estoque, maquinário e finanças em tempo real, na palma da sua mão, do plantio à colheita.</p>
+                    <a href="#" class="text-blue-600 font-semibold flex items-center gap-1 hover:text-blue-800">Saiba mais <i class="fas fa-angle-right"></i></a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-earth-50 text-earth-700 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-earth-700 group-hover:text-white transition-colors duration-300" style="background-color: #fdf8f6;">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Bioinsumos & Proteção</h4>
+                    <p class="text-gray-600 mb-4">Portfólio avançado de defensivos biológicos e químicos focados em alta eficiência agronômica e respeito ao meio ambiente, adaptados ao clima tropical.</p>
+                    <a href="#" class="text-earth-700 font-semibold flex items-center gap-1 hover:text-earth-900">Saiba mais <i class="fas fa-angle-right"></i></a>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-yellow-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Genética & Sementes</h4>
+                    <p class="text-gray-600 mb-4">Parcerias com as melhores marcas para fornecimento de cultivares de alta performance, resistentes a pragas e adaptadas à sua região.</p>
+                    <a href="#" class="text-yellow-600 font-semibold flex items-center gap-1 hover:text-yellow-700">Saiba mais <i class="fas fa-angle-right"></i></a>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-hand-holding-dollar"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Originação e Barter</h4>
+                    <p class="text-gray-600 mb-4">Operações estruturadas de troca (barter) e comercialização de grãos para garantir liquidez e segurança financeira para o produtor rural.</p>
+                    <a href="#" class="text-purple-600 font-semibold flex items-center gap-1 hover:text-purple-800">Saiba mais <i class="fas fa-angle-right"></i></a>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-users-gear"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Consultoria Agronômica</h4>
+                    <p class="text-gray-600 mb-4">Equipe técnica de campo altamente especializada para acompanhamento da safra, prescrição de receituários e manejo integrado de pragas.</p>
+                    <a href="#" class="text-teal-600 font-semibold flex items-center gap-1 hover:text-teal-800">Saiba mais <i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative bg-stats-pattern">
+        <div class="absolute inset-0 bg-navy-900/90 mix-blend-multiply"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-extrabold text-agro-400 mb-2">15+</div>
+                    <div class="text-white font-medium text-sm md:text-base uppercase tracking-wide">Anos de Experiência</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-extrabold text-agro-400 mb-2">2.5M</div>
+                    <div class="text-white font-medium text-sm md:text-base uppercase tracking-wide">Hectares Monitorados</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-extrabold text-agro-400 mb-2">500+</div>
+                    <div class="text-white font-medium text-sm md:text-base uppercase tracking-wide">Clientes Ativos</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-extrabold text-agro-400 mb-2">100%</div>
+                    <div class="text-white font-medium text-sm md:text-base uppercase tracking-wide">Foco em Resultados</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tecnologia" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <!-- Abstract decorative blob -->
+                        <div class="absolute -inset-4 bg-gradient-to-r from-agro-200 to-blue-200 rounded-full blur-2xl opacity-60"></div>
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?q=80&w=2072&auto=format&fit=crop" alt="Agricultor usando tablet" class="relative rounded-2xl shadow-2xl z-10 w-full object-cover h-[500px]">
+                        
+                        <!-- Floating card -->
+                        <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-xl shadow-xl z-20 hidden md:block max-w-xs border border-gray-100">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="w-10 h-10 bg-agro-100 rounded-full flex items-center justify-center text-agro-600">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <h5 class="font-bold text-gray-900">Integração Total</h5>
+                            </div>
+                            <p class="text-sm text-gray-600">Dados do campo direto para o escritório em tempo real. Sem retrabalho.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <h2 class="text-agro-700 font-semibold tracking-wide uppercase text-sm mb-2">Tecnologia Embarcada</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">A Plataforma AgriX</h3>
+                    <p class="text-gray-600 text-lg mb-8">
+                        Nosso software próprio foi desenhado para a realidade da agricultura tropical. Diferente de sistemas genéricos, o AgriX entende as variáveis bióticas, o clima inconstante e a necessidade de operações ágeis.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-agro-100 flex items-center justify-center text-agro-600">
+                                    <i class="fas fa-mobile-screen"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">App Offline First</h4>
+                                <p class="text-gray-600">Apontamentos de campo funcionam mesmo sem internet. Sincronização automática ao encontrar rede.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">Inteligência Artificial</h4>
+                                <p class="text-gray-600">Algoritmos preditivos para alertas fitossanitários e recomendação de janelas ideais de aplicação.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">Módulo Financeiro Integrado</h4>
+                                <p class="text-gray-600">Cálculo exato do Custo de Produção por Hectare, com rateio automático de maquinário e insumos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sustentabilidade" class="py-20 bg-agro-900 text-white relative">
+        <!-- SVG Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <i class="fas fa-leaf text-4xl text-agro-400 mb-4"></i>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Compromisso com o Futuro</h2>
+                <p class="text-gray-300 text-lg">Acreditamos que a produtividade não pode prescindir da conservação ambiental. Nossas práticas são desenhadas para o "efeito poupa-terra".</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto bg-agro-800 rounded-full flex items-center justify-center text-3xl text-agro-300 border-2 border-agro-600 mb-6">
+                        <i class="fas fa-bug-slash"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Manejo Integrado (MIP)</h4>
+                    <p class="text-gray-400">Racionalização do uso de químicos através de monitoramento rigoroso, preservando inimigos naturais e aplicando apenas quando o dano econômico justifica.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto bg-agro-800 rounded-full flex items-center justify-center text-3xl text-agro-300 border-2 border-agro-600 mb-6">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Revolução dos Bioinsumos</h4>
+                    <p class="text-gray-400">Expansão contínua do portfólio de biodefensivos e inoculantes, promovendo uma agricultura regenerativa e a saúde microbiológica do solo.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto bg-agro-800 rounded-full flex items-center justify-center text-3xl text-agro-300 border-2 border-agro-600 mb-6">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Logística Reversa</h4>
+                    <p class="text-gray-400">Participação ativa no Sistema Campo Limpo, garantindo a destinação correta e a reciclagem de 100% das embalagens de insumos comercializadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                <div class="flex flex-col lg:flex-row">
+                    <!-- Contact Info -->
+                    <div class="lg:w-2/5 bg-navy-900 text-white p-10 md:p-12 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-2">Vamos evoluir juntos?</h3>
+                            <p class="text-gray-300 mb-10">Fale com nossos especialistas e descubra como a Agrix pode transformar a gestão e a rentabilidade da sua propriedade.</p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <i class="fas fa-map-marker-alt mt-1.5 text-agro-400 text-xl"></i>
+                                    <div>
+                                        <h5 class="font-semibold text-lg">Sede Corporativa</h5>
+                                        <p class="text-gray-300">Av. do Agronegócio, 1500 - Centro-Oeste<br>Mato Grosso, Brasil</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <i class="fas fa-phone mt-1.5 text-agro-400 text-xl"></i>
+                                    <div>
+                                        <h5 class="font-semibold text-lg">Telefone</h5>
+                                        <p class="text-gray-300">+55 0800 123 4567<br>Seg-Sex, 8h às 18h</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <i class="fas fa-envelope mt-1.5 text-agro-400 text-xl"></i>
+                                    <div>
+                                        <h5 class="font-semibold text-lg">E-mail</h5>
+                                        <p class="text-gray-300">contato@agrix.com.br</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12">
+                            <h5 class="font-semibold mb-4">Siga nossas redes:</h5>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agro-500 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agro-500 transition-colors"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agro-500 transition-colors"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:w-3/5 p-10 md:p-12">
+                        <form id="contact-form" onsubmit="event.preventDefault(); showSuccessMessage();">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+                                    <input type="text" id="nome" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agro-500 focus:border-agro-500 outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label for="empresa" class="block text-sm font-medium text-gray-700 mb-2">Fazenda / Empresa</label>
+                                    <input type="text" id="empresa" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agro-500 focus:border-agro-500 outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">E-mail Corporativo *</label>
+                                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agro-500 focus:border-agro-500 outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label for="telefone" class="block text-sm font-medium text-gray-700 mb-2">WhatsApp / Telefone *</label>
+                                    <input type="tel" id="telefone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agro-500 focus:border-agro-500 outline-none transition-all">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="interesse" class="block text-sm font-medium text-gray-700 mb-2">Área de Interesse</label>
+                                <select id="interesse" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agro-500 focus:border-agro-500 outline-none transition-all bg-white">
+                                    <option>Software de Gestão (ERP)</option>
+                                    <option>Insumos e Biológicos</option>
+                                    <option>Agricultura de Precisão</option>
+                                    <option>Operações de Barter</option>
+                                    <option>Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-6">
+                                <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+                                <textarea id="mensagem" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agro-500 focus:border-agro-500 outline-none transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-agro-700 hover:bg-agro-800 text-white font-bold py-4 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-lg">
+                                Enviar Solicitação
+                            </button>
+                        </form>
+                        
+                        <!-- Success Message Box (Hidden by default) -->
+                        <div id="success-message" class="hidden mt-6 bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-lg flex items-center gap-3">
+                            <i class="fas fa-check-circle text-2xl text-green-500"></i>
+                            <div>
+                                <h4 class="font-bold">Mensagem Enviada!</h4>
+                                <p class="text-sm">Nossa equipe comercial entrará em contato em breve.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <!-- Small Logo Footer -->
+                        <svg class="h-8 w-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="40" stroke="#86efac" stroke-width="4" stroke-dasharray="100 150" stroke-linecap="round" class="transform rotate-[-45deg] origin-center" />
+                            <path d="M50 80 C 50 80, 50 40, 50 20 C 70 20, 85 35, 85 50 C 85 65, 70 80, 50 80 Z" fill="#22c55e" />
+                            <path d="M50 80 C 50 80, 50 50, 50 35 C 35 35, 25 45, 25 55 C 25 65, 35 80, 50 80 Z" fill="#86efac" />
+                        </svg>
+                        <span class="text-2xl font-bold text-white tracking-wider">AGRIX</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Impulsionando a produtividade do agronegócio através da inovação tecnológica, gestão de dados e práticas sustentáveis.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase text-sm tracking-wider">Soluções</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">AgriX ERP</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Agricultura Digital</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Proteção de Cultivos</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Sementes</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase text-sm tracking-wider">Empresa</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Sobre Nós</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Carreiras</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">ESG e Sustentabilidade</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Imprensa</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase text-sm tracking-wider">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">Termos de Uso</a></li>
+                        <li><a href="#" class="hover:text-agro-400 transition-colors">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 Agrix Agronegócio & Inovação. Todos os direitos reservados.</p>
+                <p class="mt-2 md:mt-0">Desenvolvido com tecnologia para o campo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('py-3');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // Form Submission Simulation
+        function showSuccessMessage() {
+            const form = document.getElementById('contact-form');
+            const successBox = document.getElementById('success-message');
+            
+            // Hide form, show success
+            form.style.display = 'none';
+            successBox.classList.remove('hidden');
+            
+            // Optional: reset after a few seconds
+            setTimeout(() => {
+                form.reset();
+                form.style.display = 'block';
+                successBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Simple smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
